@@ -20,6 +20,18 @@ public class OpenPackage : MonoBehaviour
 
     List<GameObject> cards = new List<GameObject>();  // 用于清空卡池的临时链表
 
+    /// <summary>
+    /// 视频中写成"PlayerData"
+    /// </summary>
+    public PlayerData playerData;
+
+
+
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +47,27 @@ public class OpenPackage : MonoBehaviour
         
     }
 
+
+
+
+
+
+
+
+
+
+
     public void OnClickOpen()
     {
+        if (playerData.playerCoins < 2)  // 如果玩家的金币数不够，就不能开卡包
+        {
+            Debug.Log("金币不够，不能开卡包");
+            return;
+        }
+        else
+        {
+            playerData.playerCoins -= 2;
+        }
         ClearPool();  // 每次点击按钮前都先清空卡池
         for (int i = 0; i < 5; i++)
         {
@@ -51,14 +82,32 @@ public class OpenPackage : MonoBehaviour
            // 这步是为了实现清空卡池而添加的
            cards.Add(newCard);  // 新生成的卡牌添加到链表这个为了清空卡池而设置的临时链表中
         }
+        SaveCardData();  // 把抽到的卡保存到playerData
+        playerData.SavePlayerData();  // 保存玩家数据到PlayerData.csv
+        Debug.Log("剩余金币：" + playerData.playerCoins + " 枚");
     }
 
-    public void ClearPool()  // 清空卡池
+    /// <summary>
+    /// 清空卡池
+    /// </summary>
+    public void ClearPool()
+    {
+        foreach (var card in cards)  // 销毁卡池中的每一张卡
+        {
+            Destroy(card);
+        }
+        cards.Clear();
+    }
+
+    /// <summary>
+    /// 把抽到的卡保存到playerData
+    /// </summary>
+    public void SaveCardData()
     {
         foreach (var card in cards)
         {
-            Destroy(card);  // 销毁卡池中的每一张卡牌（循环后效果）
+            int id = card.GetComponent<CardDisplay>().card.id;  // 获取这张卡的id
+            playerData.playerCards[id] += 1;  // 玩家拥有该卡的数量增加1
         }
-        cards.Clear();
     }
 }

@@ -23,6 +23,19 @@ public class CardDisplay : MonoBehaviour
 
     public Card card;  // 别的文件里的Card类竟然直接就能使用到
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +47,21 @@ public class CardDisplay : MonoBehaviour
     {
         
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void ShowCard()
     {

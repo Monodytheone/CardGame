@@ -4,7 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// 本脚本挂载在CardStore上
-/// 该脚本目前用于从.csv文件载入卡牌信息
+/// <para>在Start中调用本脚本里写的LoadCardData方法，随机返回一张卡，用于从CardData.csv文件载入卡牌信息</para>
+/// <para>CardStore还提供了一个RandowCard方法，供OpenPackage调用</para>
 /// </summary>
 
 
@@ -15,10 +16,17 @@ public class CardStore : MonoBehaviour
 {
     public TextAsset cardData;  // 这是从.csv文件读取的卡组信息
     public List<Card> cardList = new List<Card>();  // List的类型是父类"Card"，但里面可以放子类对象
+
+
+
+
+
+
+
     /// Start is called before the first frame update
     void Start()
     {
-        LoadCardData();  // 游戏开始时调用这个函数以载入卡牌信息
+        //LoadCardData();  // 这个的调用放到PlayerData.cs里了
 
         //TestLoad();  // 游戏开始时，卡牌信息载入后进行测试
     }
@@ -28,6 +36,12 @@ public class CardStore : MonoBehaviour
     {
         
     }
+
+
+
+
+
+
     public void LoadCardData()
     {
         string[] dataRow = cardData.text.Split('\n');  // 按照换行符来分割，分隔成每一行，存到dataRow中
@@ -72,8 +86,12 @@ public class CardStore : MonoBehaviour
         }
     }
 
-   
-    public Card RandomCard()  // 返回一张随机的牌（以Card类对象的形式返回信息）
+
+    /// <summary>
+    /// 返回一张随机的牌（以Card类对象的形式返回信息）
+    /// </summary>
+    /// <returns>一张随机的牌</returns>
+    public Card RandomCard()  // 
     {
         Card card = cardList[Random.Range(0, cardList.Count)];
         return card;
