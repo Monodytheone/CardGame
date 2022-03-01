@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 /// <summary>
 /// 此脚本挂载在CardStore上，用于实现点击按钮时发牌的功能
-/// 点击Open Package按钮时，生成五张卡片放在屏幕中
-/// 这五张卡牌会从之前定义好的预制件（Prefabs）中调用
+/// <para>点击Open Package按钮时，生成五张卡片放在屏幕中</para>
+/// <para>这五张卡牌会从之前定义好的预制件（Prefabs）中调用</para>
 /// </summary>
 public class OpenPackage : MonoBehaviour
 {
