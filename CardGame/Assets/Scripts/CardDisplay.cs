@@ -1,9 +1,4 @@
-﻿/// <summary>
-/// 这个脚本是挂载在游戏中的"Card"这个对象上的
-/// Card对象中的子对象们，都会一一和这个CardDisplay类的成员挂接
-/// 
-/// 该脚本用于显示卡牌
-/// </summary>
+﻿
 
 
 
@@ -12,6 +7,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;  // unity的UI库
 
+/// <summary>
+/// 这个脚本是挂载在游戏中的"Card"这个对象上的
+/// <para>Card对象中的子对象们，都会一一和这个CardDisplay类的成员挂接</para>
+/// <para>该脚本用于显示卡牌</para>
+/// <para>单独用一个脚本来控制卡牌的显示的原因是：卡牌有怪物卡和魔法卡两种类型，它们拥有的属性不同，
+/// 需要根据卡牌的类型来显示不同的组件</para>
+/// 
+/// </summary>
 public class CardDisplay : MonoBehaviour
 {
     public Text nameText;  // Text: UnityEngine.UI.Text

@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 coins,230
 card,0,40
 card,1,37
 card,2,46
+=======
+coins,232
+card,0,38
+card,1,38
+card,2,42
+>>>>>>> Stashed changes
 card,3,30
 card,4,33
 card,5,41
