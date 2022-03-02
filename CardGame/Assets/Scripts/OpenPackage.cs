@@ -22,7 +22,8 @@ public class OpenPackage : MonoBehaviour
     List<GameObject> cards = new List<GameObject>();  // 用于清空卡池的临时链表
 
     /// <summary>
-    /// 视频中写成"PlayerData"
+    /// <para>与PlayerData绑定</para>
+    /// <para>视频中写成"PlayerData"</para>
     /// </summary>
     public PlayerData playerData;
 

@@ -5,6 +5,7 @@ using System.IO;  // 文件读写库
 
 /// <summary>
 /// 挂载在名为"PlayerData"的空对象(Create Empty)上
+/// <para>主要的两大功能为，从PlayerData.csv中读取玩家信息、把玩家信息写出到PlayerData.csv中</para>
 /// </summary>
 
 public class PlayerData : MonoBehaviour
@@ -68,7 +69,7 @@ public class PlayerData : MonoBehaviour
 
 
     /// <summary>
-    /// 加在玩家数据，在Start中调用 
+    /// 加载玩家数据，在Start中调用 
     /// </summary>
     public void LoadPlayerData()
     {
