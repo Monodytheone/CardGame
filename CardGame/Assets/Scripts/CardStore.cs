@@ -4,8 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// 本脚本挂载在CardStore上
-/// <para>在Start中调用本脚本里写的LoadCardData方法，随机返回一张卡，用于从CardData.csv文件载入卡牌信息</para>
-/// <para>CardStore还提供了一个RandowCard方法，供OpenPackage调用</para>
+/// <para>在Start中调用本脚本里写的LoadCardData方法，用于从CardData.csv文件载入卡牌信息</para>
+/// <para>CardStore还提供了一个RandowCard方法，随机返回一张卡，供OpenPackage调用</para>
 /// </summary>
 
 
