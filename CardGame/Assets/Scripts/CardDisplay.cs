@@ -20,6 +20,9 @@ public class CardDisplay : MonoBehaviour
 
     public Image backgroundImage;  // Image: UnityEngine.UI.Text
 
+    /// <summary>
+    /// Card类型是我自定义的，该变量不会显示在Unity里的Inspector界面中
+    /// </summary>
     public Card card;  // 别的文件里的Card类竟然直接就能使用到
 
 

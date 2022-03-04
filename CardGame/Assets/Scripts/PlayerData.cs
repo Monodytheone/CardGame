@@ -5,13 +5,14 @@ using System.IO;  // 文件读写库
 
 /// <summary>
 /// 挂载在名为"PlayerData"的空对象(Create Empty)上
-/// <para>主要的两大功能为，从PlayerData.csv中读取玩家信息、把玩家信息写出到PlayerData.csv中</para>
+/// <para>主要的两大功能为：从PlayerData.csv中读取玩家信息、把玩家信息写出到PlayerData.csv中</para>
 /// </summary>
 
 public class PlayerData : MonoBehaviour
 {
     /// <summary>
     /// 视频中是"CardStore"，我写成"cardStore"了，防止误解
+    /// <para>大概明白为什么要开头大写了，获取同一物体上的其他脚本似乎都要大写</para>
     /// </summary>
     public CardStore cardStore;
 
@@ -27,8 +28,10 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public int[] playerCards;
 
+    public int[] playerDeck;
+
     /// <summary>
-    /// 从PlayerData.csv读入的东西
+    /// <para>  挂PlayerData.csv  </para>
     /// </summary>
     public TextAsset playerData;
 
@@ -74,6 +77,7 @@ public class PlayerData : MonoBehaviour
     public void LoadPlayerData()
     {
         playerCards = new int[cardStore.cardList.Count];  // 确定数组长度为卡牌的种数
+        playerDeck = new int[cardStore.cardList.Count];
         string[] dataRow = playerData.text.Split('\n');   // 数组的每一项是PlayerData.csv中的一行
         foreach (var row in dataRow)
         {
@@ -89,6 +93,12 @@ public class PlayerData : MonoBehaviour
                 int id = int.Parse(rowArray[1]);
                 int num = int.Parse(rowArray[2]);
                 playerCards[id] = num;
+            }
+            else if(rowArray[0] == "deck")
+            {
+                int id = int.Parse(rowArray[1]);
+                int num = int.Parse(rowArray[2]);
+                playerDeck[id] = num;  // 载入卡组
             }
         }
         Debug.Log("玩家信息已载入");
@@ -111,6 +121,13 @@ public class PlayerData : MonoBehaviour
         }
 
         // 保存卡组（下一期视频（P5）再进行）
+        for (int i = 0; i < playerDeck.Length; i++)
+        {
+            if(playerDeck[i] != 0)
+            {
+                datas.Add("deck," + i.ToString() + "," + playerDeck[i].ToString());
+            }
+        }
 
         File.WriteAllLines(path, datas);  // 保存数据到PlayerData.csv
     }

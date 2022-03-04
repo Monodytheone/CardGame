@@ -14,7 +14,14 @@ using UnityEngine;
 // 这么一来，CardStore类的实例一被定义出来就拥有了完整的卡组信息
 public class CardStore : MonoBehaviour
 {
-    public TextAsset cardData;  // 这是从.csv文件读取的卡组信息
+    /// <summary>
+    /// 挂CardData.csv
+    /// </summary>
+    public TextAsset cardData;
+
+    /// <summary>
+    /// 存储卡组的列表
+    /// </summary>
     public List<Card> cardList = new List<Card>();  // List的类型是父类"Card"，但里面可以放子类对象
 
 
