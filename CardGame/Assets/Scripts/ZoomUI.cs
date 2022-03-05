@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.EventSystems;  // 为了鼠标响应的功能
 
 /// <summary>
 /// 鼠标移到卡牌上时将其放大

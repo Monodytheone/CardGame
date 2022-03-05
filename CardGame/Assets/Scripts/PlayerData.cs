@@ -28,6 +28,9 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public int[] playerCards;
 
+    /// <summary>
+    /// 卡组中每种卡牌的数量
+    /// </summary>
     public int[] playerDeck;
 
     /// <summary>

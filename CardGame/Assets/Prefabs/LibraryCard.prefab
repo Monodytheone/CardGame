@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 4965900675746363604}
   - component: {fileID: 6734566455233810622}
   - component: {fileID: 3429427713694709870}
+  - component: {fileID: 3679476544874108426}
   m_Layer: 5
   m_Name: LibraryCard
   m_TagString: Untagged
@@ -577,7 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e479c592ae7e64b4c9cc9e7b07a466f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counter: {fileID: 6734566456221299734}
+  counterText: {fileID: 6734566456221299734}
 --- !u!114 &3429427713694709870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +591,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02fc7b46f7d810d49a2b68c1be32e6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSize: 1.2
+  zoomSize: 1.1
+--- !u!114 &3679476544874108426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6861457427445170297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64f59efa9399b24eb9d25dafaa521dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1 &6861457427602521345
 GameObject:
   m_ObjectHideFlags: 0
