@@ -1,8 +1,8 @@
-﻿<
+<
 using System.Collections;
 =======
-锘縰sing System.Collections;
->>>>>>> parent of bb45b15 (绠€鍖朣aveDeck)
+﻿using System.Collections;
+>>>>>>> parent of bb45b15 (简化SaveDeck)
 =======
 using System.Collections;
 using System.Collections.Generic;
