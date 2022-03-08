@@ -31,9 +31,6 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public GameObject cardPrefab;
 
-    /// <summary>
-    /// 注意，这不是DeckManager，是DataManager---scene上的另一个物体
-    /// </summary>
     public GameObject DataManager;  // 得找下规律为啥up刻意把一些变量开头大写，是因为开头大写的都是脚本吗？（比如下面两个）
                                     // 虽然Up说的是脚本，不过其实好像是Scene里有的物体就要大写
 
@@ -132,7 +129,7 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     /// <param name="_state">点击的卡牌在library里还是deck里</param>
     /// <param name="_id"></param>
-    public void UpdateCard(CardState _state, int _id)  // 下次一定起名叫"MoveCard"
+    public void UpdateCard(CardState _state, int _id)
     {
         if (_state == CardState.Deck)  // Deck中的卡移到Library中
         {
@@ -206,7 +203,7 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public void CreatCard(int _id, CardState _cardState)
     {
-        //Debug.Log("CreatCard被调用");
+        Debug.Log("CreatCard被调用");
         Transform targetPanel;  // 创建卡牌的目标位置
         GameObject targetPerfab;  // 要创建的预制件
 
