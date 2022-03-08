@@ -51,6 +51,7 @@ public class CardStore : MonoBehaviour
 
     public void LoadCardData()
     {
+        Debug.Log("CardStore.LoadCardData()");
         string[] dataRow = cardData.text.Split('\n');  // 按照换行符来分割，分隔成每一行，存到dataRow中
         foreach (var row in dataRow)
         {
@@ -70,7 +71,7 @@ public class CardStore : MonoBehaviour
                 MonsterCard monsterCard = new MonsterCard(id, name, atk, health);  // 新建怪兽卡一张，用上面从.csv里读入的属性值初始化
                 cardList.Add(monsterCard);  // 把新建的这张卡加入CardList
 
-                Debug.Log("读取到怪兽卡: " + monsterCard.cardName);  // 测试
+                //Debug.Log("读取到怪兽卡: " + monsterCard.cardName);  // 测试
             }
             else if(rowArray[0] == "spell")
             {

@@ -31,9 +31,6 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public GameObject cardPrefab;
 
-    /// <summary>
-    /// 注意，这不是DeckManager，是DataManager---scene上的另一个物体
-    /// </summary>
     public GameObject DataManager;  // 得找下规律为啥up刻意把一些变量开头大写，是因为开头大写的都是脚本吗？（比如下面两个）
                                     // 虽然Up说的是脚本，不过其实好像是Scene里有的物体就要大写
 
@@ -62,12 +59,24 @@ public class DeckManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 获取这两个脚本
+        ///经过debug，看起来原因应该是：
+        ///PlayerData.Start()后于DeckManager.Start()执行，
+        ///导致UpdateLibrary()被调用时，playerData并没有加载好
+        // 获取这两个脚本                  
+        //DataManager.GetComponent<PlayerData>().
+        Debug.Log("DeckManager.Start()");
         PlayerData = DataManager.GetComponent<PlayerData>();
         CardStore = DataManager.GetComponent<CardStore>();
 
+        // 加了下面这两行，先于卡库和卡组的显示载入了CardStore和PlayerData，勉强能用了，但为啥原本什么都不做时也能正常运行呢？
+        CardStore.LoadCardData();
+        //Debug.Log("1111");
+        PlayerData.LoadPlayerData();
+
         UpdateLibrary();
         UpdateDeck();
+
+        /// 测试看来，PlayerData.Start()会在DeckManager.Start()整个执行完之后才被调用
     }
 
     // Update is called once per frame
@@ -87,6 +96,8 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public void UpdateLibrary()
     {
+        Debug.Log("Deckmanager.UpdateLibrary");
+        Debug.Log("playerCards.Length = " + PlayerData.playerCards.Length.ToString());  // 鉴定： 为0了，所以不会进入循环
         for (int i = 0; i < PlayerData.playerCards.Length; i++)
         {
             // 如果一种卡的数量不是0，就在libraryPanel中生成一个
@@ -101,6 +112,7 @@ public class DeckManager : MonoBehaviour
                 CreatCard(i, CardState.Library);
                 // libraryDic不用管了吗？
             }
+            //Debug.Log("loop"); 
 
         }
     }
@@ -110,6 +122,7 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public void UpdateDeck()
     {
+        Debug.Log("DeckManager.UpdateDeck()");
         for (int i = 0; i < PlayerData.playerDeck.Length; i++)
         {
             if (PlayerData.playerDeck[i] > 0)
@@ -132,7 +145,7 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     /// <param name="_state">点击的卡牌在library里还是deck里</param>
     /// <param name="_id"></param>
-    public void UpdateCard(CardState _state, int _id)  // 下次一定起名叫"MoveCard"
+    public void UpdateCard(CardState _state, int _id)
     {
         if (_state == CardState.Deck)  // Deck中的卡移到Library中
         {
@@ -206,7 +219,7 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public void CreatCard(int _id, CardState _cardState)
     {
-        //Debug.Log("CreatCard被调用");
+        Debug.Log("CreatCard被调用");
         Transform targetPanel;  // 创建卡牌的目标位置
         GameObject targetPerfab;  // 要创建的预制件
 
