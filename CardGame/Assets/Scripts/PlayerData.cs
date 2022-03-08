@@ -80,6 +80,7 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public void LoadPlayerData()
     {
+        //Debug.Log("LoadPlayerData()");
         playerCards = new int[cardStore.cardList.Count];  // 确定数组长度为卡牌的种数
         playerDeck = new int[cardStore.cardList.Count];
         string[] dataRow = playerData.text.Split('\n');   // 数组的每一项是PlayerData.csv中的一行
@@ -105,7 +106,7 @@ public class PlayerData : MonoBehaviour
                 playerDeck[id] = num;  // 载入卡组
             }
         }
-        Debug.Log("玩家信息已载入");
+        //Debug.Log("玩家信息已载入");
         Debug.Log(playerCoins.ToString());
     }
 

@@ -63,6 +63,7 @@ public class DeckManager : MonoBehaviour
     void Start()
     {
         // 获取这两个脚本
+        Debug.Log("DeckManager.Start()");
         PlayerData = DataManager.GetComponent<PlayerData>();
         CardStore = DataManager.GetComponent<CardStore>();
 
