@@ -1,5 +1,6 @@
 coins,194,
 card,0,52
+<<<<<<< HEAD
 card,1,48
 card,2,72
 card,3,44
@@ -8,3 +9,16 @@ card,5,45
 deck,0,2
 deck,3,1
 deck,4,3
+=======
+card,1,46
+card,2,70
+card,3,43
+card,4,53
+card,5,44
+deck,0,2
+deck,1,2
+deck,2,2
+deck,3,2
+deck,4,2
+deck,5,1
+>>>>>>> parent of 1cb84e4 (改注释)
