@@ -28,7 +28,7 @@ public class ClickCard : MonoBehaviour, IPointerDownHandler
 
     /// <summary>
     /// 卡牌位置（卡库or卡牌？)
-    /// <para>不用担心state的值是从哪里获得的，挂在</para>
+    /// <para>不用担心state的值是从哪里获得的，此脚本挂在预制件上，在预制件的Inspector界面中选择state的值</para>
     /// </summary>
     public CardState state;
 
@@ -64,7 +64,7 @@ public class ClickCard : MonoBehaviour, IPointerDownHandler
     /// <param name="pointerDown"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("点击有效");
+        //Debug.Log("点击有效");
         int id = this.GetComponent<CardDisplay>().card.id;
         // 这个CardDisplay又是谁身上的呢？
         //   答：是this

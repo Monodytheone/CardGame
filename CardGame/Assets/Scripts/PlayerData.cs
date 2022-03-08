@@ -5,6 +5,7 @@ using System.IO;  // 文件读写库
 
 /// <summary>
 /// 挂载在名为"PlayerData"的空对象(Create Empty)上
+/// <para>包含的信息有：1.</para>
 /// <para>主要的两大功能为：从PlayerData.csv中读取玩家信息、把玩家信息写出到PlayerData.csv中</para>
 /// </summary>
 
