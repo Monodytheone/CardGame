@@ -59,6 +59,8 @@ public class DeckManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("DeckManager.Start()");
+
         // 获取这两个脚本
         PlayerData = DataManager.GetComponent<PlayerData>();
         CardStore = DataManager.GetComponent<CardStore>();

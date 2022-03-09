@@ -55,6 +55,8 @@ public class PlayerData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("PlayerData.Start()");
+
         cardStore.LoadCardData();  // 卡组信息要比玩家信息先一步载入
         LoadPlayerData();
     }
@@ -79,6 +81,7 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public void LoadPlayerData()
     {
+        Debug.Log("PlayerData.LoadPlayerData()");
         playerCards = new int[cardStore.cardList.Count];  // 确定数组长度为卡牌的种数
         playerDeck = new int[cardStore.cardList.Count];
         string[] dataRow = playerData.text.Split('\n');   // 数组的每一项是PlayerData.csv中的一行
