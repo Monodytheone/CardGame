@@ -70,10 +70,13 @@ public class DeckManager : MonoBehaviour
 
         // 加了下面这两行，先于卡库和卡组的显示载入了CardStore和PlayerData，勉强能用了，但为啥原本什么都不做时也能正常运行呢？
         CardStore.LoadCardData();
+        //Debug.Log("1111");
         PlayerData.LoadPlayerData();
 
         UpdateLibrary();
         UpdateDeck();
+
+        /// 测试看来，PlayerData.Start()会在DeckManager.Start()整个执行完之后才被调用
     }
 
     // Update is called once per frame
@@ -109,7 +112,7 @@ public class DeckManager : MonoBehaviour
                 CreatCard(i, CardState.Library);
                 // libraryDic不用管了吗？
             }
-            Debug.Log("loop");  // Bug: 这个一次都没执行
+            //Debug.Log("loop"); 
 
         }
     }
@@ -119,6 +122,7 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public void UpdateDeck()
     {
+        Debug.Log("DeckManager.UpdateDeck()");
         for (int i = 0; i < PlayerData.playerDeck.Length; i++)
         {
             if (PlayerData.playerDeck[i] > 0)
