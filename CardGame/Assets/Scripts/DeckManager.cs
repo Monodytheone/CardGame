@@ -68,10 +68,12 @@ public class DeckManager : MonoBehaviour
         PlayerData = DataManager.GetComponent<PlayerData>();
         CardStore = DataManager.GetComponent<CardStore>();
 
-        // 加了下面这两行，先于卡库和卡组的显示载入了CardStore和PlayerData，勉强能用了，但为啥原本什么都不做时也能正常运行呢？
-        CardStore.LoadCardData();
-        //Debug.Log("1111");
-        PlayerData.LoadPlayerData();
+        //// 加了下面这两行，先于卡库和卡组的显示载入了CardStore和PlayerData，勉强能用了，但为啥原本什么都不做时也能正常运行呢？
+        //CardStore.LoadCardData();
+        ////Debug.Log("1111");
+        //PlayerData.LoadPlayerData();
+        
+        // 我添加了脚本执行顺序，现在不用上面这两行了
 
         UpdateLibrary();
         UpdateDeck();
