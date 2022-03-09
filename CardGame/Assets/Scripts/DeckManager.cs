@@ -59,10 +59,18 @@ public class DeckManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 获取这两个脚本
+        ///经过debug，看起来原因应该是：
+        ///PlayerData.Start()后于DeckManager.Start()执行，
+        ///导致UpdateLibrary()被调用时，playerData并没有加载好
+        // 获取这两个脚本                  
+        //DataManager.GetComponent<PlayerData>().
         Debug.Log("DeckManager.Start()");
         PlayerData = DataManager.GetComponent<PlayerData>();
         CardStore = DataManager.GetComponent<CardStore>();
+
+        // 加了下面这两行，先于卡库和卡组的显示载入了CardStore和PlayerData，勉强能用了，但为啥原本什么都不做时也能正常运行呢？
+        CardStore.LoadCardData();
+        PlayerData.LoadPlayerData();
 
         UpdateLibrary();
         UpdateDeck();
@@ -85,6 +93,8 @@ public class DeckManager : MonoBehaviour
     /// </summary>
     public void UpdateLibrary()
     {
+        Debug.Log("Deckmanager.UpdateLibrary");
+        Debug.Log("playerCards.Length = " + PlayerData.playerCards.Length.ToString());  // 鉴定： 为0了，所以不会进入循环
         for (int i = 0; i < PlayerData.playerCards.Length; i++)
         {
             // 如果一种卡的数量不是0，就在libraryPanel中生成一个
@@ -99,6 +109,7 @@ public class DeckManager : MonoBehaviour
                 CreatCard(i, CardState.Library);
                 // libraryDic不用管了吗？
             }
+            Debug.Log("loop");  // Bug: 这个一次都没执行
 
         }
     }

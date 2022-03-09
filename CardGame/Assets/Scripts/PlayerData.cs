@@ -55,6 +55,13 @@ public class PlayerData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ///经过debug，看起来原因应该是：
+        ///PlayerData.Start()后于DeckManager.Start()执行，
+        ///导致UpdateLibrary()被调用时，playerData并没有加载好
+        ///
+        /// 我打算把此处Start()中的内容移到DeckManager中
+        /// 不行，此脚本PlayerData不知用于卡组配置这一个地方
+        Debug.Log("PlayerData.Start()");
         cardStore.LoadCardData();  // 卡组信息要比玩家信息先一步载入
         LoadPlayerData();
     }
@@ -79,7 +86,7 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public void LoadPlayerData()
     {
-        //Debug.Log("LoadPlayerData()");
+        Debug.Log("LoadPlayerData()");
         playerCards = new int[cardStore.cardList.Count];  // 确定数组长度为卡牌的种数
         playerDeck = new int[cardStore.cardList.Count];
         string[] dataRow = playerData.text.Split('\n');   // 数组的每一项是PlayerData.csv中的一行
@@ -105,7 +112,7 @@ public class PlayerData : MonoBehaviour
                 playerDeck[id] = num;  // 载入卡组
             }
         }
-        //Debug.Log("玩家信息已载入");
+        Debug.Log("玩家信息已载入");
         Debug.Log(playerCoins.ToString());
     }
 
