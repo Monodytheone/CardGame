@@ -48,7 +48,7 @@ public class CardStore : MonoBehaviour
 
 
 
-
+     
     public void LoadCardData()
     {
         Debug.Log("CardStore.LoadCardData()");
@@ -103,5 +103,29 @@ public class CardStore : MonoBehaviour
     {
         Card card = cardList[Random.Range(0, cardList.Count)];
         return card;
+    }
+
+    /// <summary>
+    /// new一张对应id的卡
+    /// </summary>
+    /// <param name="_id">要new的卡的id</param>
+    /// <returns>该new出的卡的引用</returns>
+    public Card CopyCard(int _id)
+    {
+        Card copyCard = new Card(_id, cardList[_id].cardName);
+        if(cardList[_id] is MonsterCard)  // 如果是怪兽卡
+        {
+            var monsterCard = cardList[_id] as MonsterCard;
+            copyCard = new MonsterCard(_id, monsterCard.cardName, monsterCard.attack, monsterCard.heathPointMax);
+
+            //return copyCard;
+        }
+        else if(cardList[_id] is SpellCard)
+        {
+            var spellCard = cardList[_id] as SpellCard;
+            copyCard = new SpellCard(_id, spellCard.cardName, spellCard.effect);
+        }
+
+        return copyCard;
     }
 }
