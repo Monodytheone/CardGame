@@ -48,7 +48,7 @@ public class CardStore : MonoBehaviour
 
 
 
-
+     
     public void LoadCardData()
     {
         Debug.Log("CardStore.LoadCardData()");
