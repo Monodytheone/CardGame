@@ -206,9 +206,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8803060262313060482}
-        m_TargetAssemblyTypeName: SaveDeck, Assembly-CSharp
-        m_MethodName: OnClickSaveDeck
+      - m_Target: {fileID: 8803060262313060484}
+        m_TargetAssemblyTypeName: PlayerData, Assembly-CSharp
+        m_MethodName: SavePlayerData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -985,6 +985,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9132059378455514736, guid: 9cf3161a530690946852584facd7ee40, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 4900000, guid: 030d819ce56e096478f6bf7c3ad8093c, type: 3}
     - target: {fileID: 9132059378455514742, guid: 9cf3161a530690946852584facd7ee40, type: 3}
       propertyPath: m_Name
       value: DataManager
@@ -1040,15 +1044,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9132059378455514742, guid: 9cf3161a530690946852584facd7ee40, type: 3}
   m_PrefabInstance: {fileID: 8803060262313060480}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8803060262313060482
+--- !u!114 &8803060262313060484 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9132059378455514736, guid: 9cf3161a530690946852584facd7ee40, type: 3}
+  m_PrefabInstance: {fileID: 8803060262313060480}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8803060262313060481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af48c33a69a8504f843dd027a8df5ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 915d1ea1e0ea5394fafebc1ecaf93895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
