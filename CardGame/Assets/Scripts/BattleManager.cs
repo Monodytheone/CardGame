@@ -294,15 +294,16 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void TurnEnd()
     {
-        Debug.Log("TurnEnd()");
         // 若玩家行动回合结束，则跳转到敌人抽卡
         if(GamePhase == GamePhase.playerAction)
         {
             GamePhase = GamePhase.enemyDraw;
+            Debug.Log("TurnEnd()");
         }
         else if(GamePhase == GamePhase.enemyAction)  // 若敌人行动回合结束，则跳转到玩家抽卡阶段
         {
             GamePhase = GamePhase.playerDraw;
+            Debug.Log("TurnEnd()");
         }
     }
 }
