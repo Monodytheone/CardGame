@@ -8,7 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class PhaseDisplay : MonoBehaviour
 {
-    public BattleManager BattleManager;
+    //public BattleManager BattleManager;
+    // BattleManager已经是静态的了，不需要再专门获取了
 
     /// <summary>
     /// 显示游戏阶段的Text游戏对象
@@ -46,6 +47,7 @@ public class PhaseDisplay : MonoBehaviour
     /// </summary>
     public void UpdateText()
     {
-        phaseText.text = BattleManager.GamePhase.ToString();
+        //phaseText.text = BattleManager.GamePhase.ToString();
+        phaseText.text = BattleManager.Instance.GamePhase.ToString();
     }
 }
