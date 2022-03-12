@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,6 +59,7 @@ public class DeckManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         ///经过debug，看起来原因应该是：
         ///PlayerData.Start()后于DeckManager.Start()执行，
         ///导致UpdateLibrary()被调用时，playerData并没有加载好
