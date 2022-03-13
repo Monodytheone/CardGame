@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 表示游戏阶段的枚举
@@ -86,6 +87,13 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     /// </summary>
     public GameObject cardPrefab;
 
+    /// <summary>
+    /// 游戏阶段更改事件
+    /// </summary>
+    public UnityEvent phaseChangeEvent = new UnityEvent();
+
+
+
 
 
 
@@ -149,6 +157,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
 
 
         GamePhase = GamePhase.playerDraw;  // 进入玩家抽卡阶段
+        phaseChangeEvent.Invoke();
     }
 
     /// <summary>
@@ -160,11 +169,13 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         {
             DrawCard(0, 1);
             GamePhase = GamePhase.playerAction;
+            phaseChangeEvent.Invoke();
         }
         else if (GamePhase == GamePhase.enemyDraw)
         {
             DrawCard(1, 1);
             GamePhase = GamePhase.enemyAction;
+            phaseChangeEvent.Invoke();
         }
         else
         {
@@ -324,5 +335,6 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         {
             GamePhase = GamePhase.enemyAction;
         }
+        phaseChangeEvent.Invoke();
     }
 }

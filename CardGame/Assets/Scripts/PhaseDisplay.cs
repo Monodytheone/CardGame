@@ -27,13 +27,13 @@ public class PhaseDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        BattleManager.Instance.phaseChangeEvent.AddListener(UpdateText);  // 添加回合改变的收听者 --- "UpdateText()方法"
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateText();
+
     }
 
 
