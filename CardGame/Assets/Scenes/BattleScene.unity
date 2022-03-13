@@ -453,7 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01629ac0d62bed145b6b57b171d956e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattleManager: {fileID: 595284662}
   phaseText: {fileID: 647212928}
 --- !u!1 &508519539
 GameObject:
@@ -745,7 +744,11 @@ MonoBehaviour:
   playerIcon: {fileID: 1338932709}
   enemyIcon: {fileID: 0}
   GamePhase: 0
-  cardPrefab: {fileID: 165849989198434498, guid: a89eacf827d37624495660d6afdb5419, type: 3}
+  cardPrefab: {fileID: 165849989198434498, guid: 74a3084cfdc3a5b409e228b23f348b0b, type: 3}
+  phaseChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  SummonCountMax: 0200000002000000
 --- !u!4 &595284663
 Transform:
   m_ObjectHideFlags: 0
