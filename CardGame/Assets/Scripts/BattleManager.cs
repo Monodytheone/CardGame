@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 表示游戏阶段的枚举
@@ -34,9 +35,14 @@ public enum GamePhase
 
 }
 
-
-public class BattleManager : MonoBehaviour
+/// <summary>
+/// 直接继承单例模板，
+/// 这样BattleManager就是一个继承了MonoBehaviour的单例类
+/// </summary>
+public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例模板，这样BattleManager就是一个继承了MonoBehaviour的单例类
 {
+    //public static BattleManager instance;
+
     public PlayerData playerData;
     public PlayerData enemyData;  // 数据
 
@@ -81,6 +87,10 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public GameObject cardPrefab;
 
+    /// <summary>
+    /// 游戏阶段更改事件
+    /// </summary>
+    public UnityEvent phaseChangeEvent = new UnityEvent();
 
 
 
@@ -88,6 +98,15 @@ public class BattleManager : MonoBehaviour
 
 
 
+
+
+
+
+    private void Awake()
+    {
+        //Instance = this;
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -133,11 +152,12 @@ public class BattleManager : MonoBehaviour
         ShuffletDeck(0);
         ShuffletDeck(1);  // 洗牌
 
-        DrawCard(0, 5);
-        DrawCard(1, 5);  // 玩家和敌人从各自的卡组抽5张牌，生成到各自的手牌区
+        DrawCard(0, 3);
+        DrawCard(1, 3);  // 玩家和敌人从各自的卡组抽5张牌，生成到各自的手牌区
 
 
         GamePhase = GamePhase.playerDraw;  // 进入玩家抽卡阶段
+        phaseChangeEvent.Invoke();
     }
 
     /// <summary>
@@ -149,11 +169,13 @@ public class BattleManager : MonoBehaviour
         {
             DrawCard(0, 1);
             GamePhase = GamePhase.playerAction;
+            phaseChangeEvent.Invoke();
         }
         else if (GamePhase == GamePhase.enemyDraw)
         {
             DrawCard(1, 1);
             GamePhase = GamePhase.enemyAction;
+            phaseChangeEvent.Invoke();
         }
         else
         {
@@ -305,5 +327,14 @@ public class BattleManager : MonoBehaviour
             GamePhase = GamePhase.playerDraw;
             Debug.Log("TurnEnd()");
         }
+        else if(GamePhase == GamePhase.playerDraw)
+        {
+            GamePhase = GamePhase.playerAction;
+        }
+        else if(GamePhase == GamePhase.enemyDraw)
+        {
+            GamePhase = GamePhase.enemyAction;
+        }
+        phaseChangeEvent.Invoke();
     }
 }
