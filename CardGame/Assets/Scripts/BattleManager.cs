@@ -113,6 +113,15 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     /// </summary>
     private int waitingPlayer;
 
+    /// <summary>
+    /// 箭头预制件
+    /// </summary>
+    public GameObject ArrowPrefab;
+    /// <summary>
+    /// 场景中可能存在的箭头
+    /// </summary>
+    private GameObject arrow;
+
 
 
 
@@ -441,6 +450,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         {
             waitingMonster = _monster;
             waitingPlayer = _player;
+            CreateArrow(_monster.transform, ArrowPrefab);
             Debug.Log("召唤请求通过");
         }
     }
@@ -485,5 +495,28 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         _block.GetComponent<Block>().card = _monster;
 
         SummonCounter[_player]--;  // 当前玩家的召唤次数-1
+    }
+
+    /// <summary>
+    /// 用于召唤请求时（未来可能魔法卡也用?）生成箭头
+    /// </summary>
+    /// <param name="_startPoint">箭头的起始点</param>
+    /// <param name="_prefab">箭头预制件</param>
+    public void CreateArrow(Transform _startPoint, GameObject _prefab)
+    {
+        DestroyArrow();
+        arrow = GameObject.Instantiate(_prefab, _startPoint);  // 创建箭头
+        // 赋予起始点的值
+        arrow.GetComponent<Arrow>().SetStartPoint(new Vector2(_startPoint.position.x, _startPoint.position.y));
+        
+
+    }
+
+    /// <summary>
+    /// 销毁箭头
+    /// </summary>
+    public void DestroyArrow()
+    {
+        Destroy(arrow);
     }
 }
