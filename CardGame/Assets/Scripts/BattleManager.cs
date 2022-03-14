@@ -144,7 +144,21 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetMouseButton(1))  // 如果点击鼠标右键
+        {
+            Destroy(arrow);
+            //waitingMonster = null;  // 我觉得不能这样
+
+            // 关闭所有格子的高亮
+            foreach (var block in playerBlocks)
+            {
+                block.GetComponent<Block>().SummonBlock.SetActive(false);
+            }
+            foreach (var block in enemyBlocks)
+            {
+                block.GetComponent<Block>().SummonBlock.SetActive(false);
+            }
+        }
     }
 
 
@@ -398,7 +412,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         {
             block.GetComponent<Block>().SummonBlock.SetActive(false);
         }
-
+        DestroyArrow();
         phaseChangeEvent.Invoke();
     }
 
@@ -478,6 +492,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
             block.GetComponent<Block>().SummonBlock.SetActive(false);  // 关闭高亮
             // 由于格子只有在格子高亮时才可召唤，故关闭高亮后格子就不可作为召唤目标位置了
         }
+        DestroyArrow();  // 销毁箭头
     }
 
     /// <summary>
@@ -507,7 +522,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         DestroyArrow();
         arrow = GameObject.Instantiate(_prefab, _startPoint);  // 创建箭头
         // 赋予起始点的值
-        arrow.GetComponent<Arrow>().SetStartPoint(new Vector2(_startPoint.position.x, _startPoint.position.y));
+        arrow.GetComponent<Arrow>().SetStartPoint(new Vector2(_startPoint.position.x + 960f, _startPoint.position.y +540f));
         
 
     }

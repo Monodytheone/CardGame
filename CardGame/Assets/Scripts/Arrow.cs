@@ -51,7 +51,8 @@ public class Arrow : MonoBehaviour
         // 计算变量
         EndingPoint = Input.mousePosition - new Vector3(960f, 540f, 0f);  // 终止点即时更新为鼠标位置
         ArrowPosition = new Vector2((EndingPoint.x + StartPoint.x) / 2, (EndingPoint.y + StartPoint.y) / 2);
-        ArrowLength = Mathf.Sqrt((EndingPoint.x - StartPoint.x) * (EndingPoint.x - StartPoint.x) + (EndingPoint.y - StartPoint.y) * (EndingPoint.y - StartPoint.y));
+        ArrowLength = Mathf.Sqrt((EndingPoint.x - StartPoint.x) * (EndingPoint.x - StartPoint.x)
+            + (EndingPoint.y - StartPoint.y) * (EndingPoint.y - StartPoint.y));
         ArrowTheta = Mathf.Atan2(EndingPoint.y - StartPoint.y, EndingPoint.x - StartPoint.x); ;
          
         // 对箭头的RectTransform赋值
@@ -76,5 +77,6 @@ public class Arrow : MonoBehaviour
     public void SetStartPoint(Vector2 _startPoint)
     {
         StartPoint = _startPoint - new Vector2(960f, 540f);  // 从相对左下角到相对中心 
+        //StartPoint = _startPoint;
     }
 }
