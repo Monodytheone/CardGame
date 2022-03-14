@@ -83,7 +83,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
 
 
     /// <summary>
-    /// 生成卡的预制件(暂时先挂Card1，若还需要新的功能就制作新的卡牌预制件)
+    /// 生成卡的预制件(挂BallteCard)
     /// </summary>
     public GameObject cardPrefab;
 
@@ -92,8 +92,26 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     /// </summary>
     public UnityEvent phaseChangeEvent = new UnityEvent();
 
+    /// <summary>
+    /// 可召唤的最大次数
+    /// <para>index_0: player； index_1: enemy</para>
+    /// </summary>
+    public int[] SummonCountMax = new int[2];
+    /// <summary>
+    /// 当前可召唤次数
+    /// <para>index_0: player;  index_1: enemy</para>
+    /// </summary>
+    private int[] SummonCounter = new int[2];
 
-
+    /// <summary>
+    /// 召唤时用来暂存等待召唤的怪兽卡
+    /// </summary>
+    private GameObject waitingMonster;
+    /// <summary>
+    /// 暂存发起召唤的玩家
+    /// <para>0: player, 1: enemy</para>
+    /// </summary>
+    private int waitingPlayer;
 
 
 
@@ -133,7 +151,7 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     //
     
     /// <summary>
-    /// 
+    /// 游戏开始时执行的读取数据、洗牌、抽牌操作
     /// </summary>
     public void GameStart()
     {
@@ -155,6 +173,11 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         DrawCard(0, 3);
         DrawCard(1, 3);  // 玩家和敌人从各自的卡组抽5张牌，生成到各自的手牌区
 
+        // 游戏开始时，将双方的可用召唤次数置为最大值
+        for(int i = 0; i < SummonCounter.Length; i++)
+        {
+            SummonCounter[i] = SummonCountMax[i];
+        }
 
         GamePhase = GamePhase.playerDraw;  // 进入玩家抽卡阶段
         phaseChangeEvent.Invoke();
@@ -298,6 +321,8 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
             }
             GameObject newCard = Instantiate(cardPrefab, targetHand);
             newCard.GetComponent<CardDisplay>().card = targetDeckList[0];
+            newCard.GetComponent<BattleCard>().playerID = _player;  // 将卡牌所有者ID设为相应值
+            newCard.GetComponent<BattleCard>().state = BattleCardState.inHand;  // 将卡牌状态设为：“在手牌区”
             targetDeckList.RemoveAt(0);
         }
 
@@ -310,13 +335,13 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     /// </summary>
     public void OnClikcTurnEnd()  // 这样的写法是更规范的，有时候会希望TurnEnd()是private的
     {
-        TurnEnd();
+        //TurnEnd();
+        NextPhase();
     }
 
     /// <summary>
     /// 用于玩家或敌人回合结束时切换回合
     /// </summary>
-
     //public void TurnEnd()
     //{
     //    // 若玩家行动回合结束，则跳转到敌人抽卡
