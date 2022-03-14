@@ -32,7 +32,11 @@ public class BattleCard : MonoBehaviour, IPointerDownHandler
     /// </summary>
     public BattleCardState state = BattleCardState.inHand;
 
-
+    /// <summary>
+    /// 攻击次数
+    /// </summary>
+    public int AttackCount;
+    private int attackCount;
 
 
 
@@ -55,16 +59,27 @@ public class BattleCard : MonoBehaviour, IPointerDownHandler
         //    return;
         //}
 
-        // 当怪物卡在手牌区里被点击时，发起召唤请求
+ 
         if (GetComponent<CardDisplay>().card is MonsterCard)
         {
+            // 当怪物卡在手牌区里被点击时，发起召唤请求
             if (state == BattleCardState.inHand)
             {
                 BattleManager.Instance.SummonRequest(playerID, gameObject);
             }
+            // 当怪物卡在场上被点击时，发起攻击请求
+            else if(state == BattleCardState.inBlock && attackCount > 0)
+            {
+                BattleManager.Instance.AttackRequest(playerID, gameObject);
+            }
         }
+    }
 
-
-        // 当卡片在场上被点击时，发起攻击请求
+    /// <summary>
+    /// 用于重置攻击次数（上场时）
+    /// </summary>
+    public void ResetAttack()
+    {
+        attackCount = AttackCount;
     }
 }

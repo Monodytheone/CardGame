@@ -7,9 +7,10 @@ public class ZoomSummonBlock : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(gameObject.GetComponent<Block>().SummonBlock.activeInHierarchy)  // 如果是高亮
+        if(gameObject.GetComponent<Block>().SummonBlock.activeInHierarchy || 
+            gameObject.GetComponent<Block>().AttackBlock.activeInHierarchy)  // 如果是高亮
         {
-            transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);  // x, y都扩大到原来的1.2倍
+            transform.localScale = new Vector3(1.3f, 1.3f, 1.0f);  // x, y都扩大到原来的1.2倍
         }
     }
 

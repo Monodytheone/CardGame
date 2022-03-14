@@ -19,13 +19,18 @@ public class MonsterCard: Card
     public int attack; // 攻击力
     public int healthPoint;  // 当前血量
     public int heathPointMax;  // 血量上限
+    /// <summary>
+    /// 可攻击对方的次数
+    /// </summary>
+    public int attackTime;
     // 等级、属性等属性本例子就不添加了，本教程追求最简
 
     public MonsterCard (int _id, string _cardName, int _attack, int _healthPointMax) : base(_id, _cardName)  // 最后的base：这个构造哈数继承了父类的构造函数
     {
         attack = _attack;
         healthPoint = _healthPointMax;
-        heathPointMax = _healthPointMax; 
+        heathPointMax = _healthPointMax;
+        attackTime = 2;
     }
 }
 

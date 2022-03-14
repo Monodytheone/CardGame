@@ -121,6 +121,17 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
     /// 场景中可能存在的箭头
     /// </summary>
     private GameObject arrow;
+    public Transform Canvas;  // 辅助召唤箭头？，暂时没用上
+
+
+    /// <summary>
+    /// 准备发动攻击的怪兽
+    /// </summary>
+    private GameObject attackingMonster;
+    /// <summary>
+    /// 攻击显示的箭头预制件
+    /// </summary>
+    public GameObject attackArrow;
 
 
 
@@ -510,6 +521,63 @@ public class BattleManager : MonoSingleton<BattleManager>  // 直接继承单例
         _block.GetComponent<Block>().card = _monster;
 
         SummonCounter[_player]--;  // 当前玩家的召唤次数-1
+
+        //_monster.GetComponent<BattleCard>().AttackCount = 2;  // 设置怪兽的可攻击次数 
+        // 设置怪兽可攻击对方的次数
+        MonsterCard mc = _monster.GetComponent<CardDisplay>().card as MonsterCard;
+        _monster.GetComponent<BattleCard>().AttackCount = mc.attackTime;
+        _monster.GetComponent<BattleCard>().ResetAttack();  // 重置攻击次数 
+    }
+
+    /// <summary>
+    /// 攻击请求
+    /// </summary>
+    /// <param name="_player">玩家ID</param>
+    /// <param name="_monster">发起攻击的怪兽卡</param>
+    public void AttackRequest(int _player, GameObject _monster)
+    {
+        GameObject[] blocks;
+        bool hasMonsterBlocks = false;  // 对方是否有具有怪兽的格子
+        if(_player == 0 && GamePhase == GamePhase.playerAction)
+        {
+            blocks = enemyBlocks;  // 攻击目标是对方的格子
+        }
+        else if(_player == 1 && GamePhase == GamePhase.enemyAction)
+        {
+            blocks = playerBlocks;
+        }
+        else
+        {
+            Debug.Log("不可攻击");
+            return;
+        }
+
+        foreach (var block in blocks)
+        {
+            if (block.GetComponent<Block>().card != null)
+            {
+                Debug.Log("有怪兽的格子");
+                block.GetComponent<Block>().AttackBlock.SetActive(true);  // 等待攻击的高亮显示
+
+                hasMonsterBlocks = true;
+            }
+        }
+        if(hasMonsterBlocks)
+        {
+            attackingMonster = _monster;  // 设置正在等待攻击对方的怪兽
+            CreateArrow(_monster.transform, attackArrow);  // 创建攻击箭头
+            Debug.Log("攻击请求通过");
+        }
+    }
+
+    public void AttackComfirm()
+    {
+
+    }
+
+    public void Attack()
+    {
+         
     }
 
     /// <summary>
